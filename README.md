@@ -4,7 +4,7 @@ This website provides real-time air quality data for room offices. Users can vie
 
 ## Live Demo
 
-- Back-end: "https://air-quality.azurewebsites.net/"
+- Back-end: https://air-quality.azurewebsites.net/
 - Front-end: https://main--lustrous-platypus-be1445.netlify.app/
 
 ## Installation
