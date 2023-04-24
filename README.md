@@ -1,6 +1,11 @@
-# Real-time Air Quality Measurement Website
+# Real-time Air Quality Monitoring
 
 This website provides real-time air quality data for room offices. Users can view the latest air quality measurements for different pollutants, as well as historical data and trends over time.
+
+## Live Demo
+
+- Back-end: "https://air-quality.azurewebsites.net/"
+- Front-end: https://main--lustrous-platypus-be1445.netlify.app/
 
 ## Installation
 
@@ -15,9 +20,27 @@ This will start the website on your local machine, accessible at http://localhos
 
 ## Usage
 
-To view the air quality data, first fill in the connection form on the home page then click "Connect". The website will navigate to the dashboard page that displays the lastest air quality measurements for Carbon Dioxide, TVOC, Humidity, Temperature, Air Pressure, Sunrise, and Sunset time.
+To view the air quality data, first fill in the connection form on the home page then click "Connect". The website will navigate to the dashboard page that displays the lastest air quality data. Users can also view historical data and trends over time by clicking on the "History" button. This will display a graph of air quality measurements in the past.
 
-Users can also view historical data and trends over time by clicking on the "History" button. This will display a graph of air quality measurements in the past.
+## Features
+
+Real-time indoor data:
+
+- Carbon Dioxide
+- T.V.O.C.
+- Air Pressure
+- Temperature
+- Sunrise
+- Sunset
+- Humidity
+- Light Level
+
+Real-time outdoor data:
+
+- Humidity
+- Wind
+
+Warning system: An alert will pop-up when ever a data exceed dangerous level.
 
 ## Contributing
 
