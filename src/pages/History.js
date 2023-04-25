@@ -11,7 +11,8 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
-const URL = "http://localhost:8080/"
+// const URL = "http://localhost:8080/"
+const URL = "https://air-quality.azurewebsites.net/"
 
 export const History = () => {
   const navigate = useNavigate()
