@@ -37,151 +37,152 @@ export const Connection = () => {
   }
 
   return (
-    <div className="h-screen bg-[#F8F8FF]">
-      <p className="text-center text-6xl text-light-purple font-bold py-8">
-        WELCOME
-      </p>
-      <p className="text-center text-3xl text-light-purple pb-8">
-        Haltian Demo
-      </p>
-
-      <div className="flex justify-center">
+    <div className="h-screen bg-[#F8F8FF] items-center flex">
+      <div className="flex flex-col justify-between mx-auto h-3/4 w-[45%]">
+        <p className="text-center text-3vw text-light-purple font-bold">
+          WELCOME
+        </p>
+        <p className="text-center text-1.5vw text-light-purple">
+          Indoor Air Quality Monitoring
+        </p>
         <form
-          className="w-[40%] bg-white rounded-xl p-8"
+          className="bg-white rounded-xl items-center flex justify-around h-[80%]"
           onSubmit={handleSubmit}
         >
-          <div className="font-semibold text-xl mb-2">Connection Input</div>
+          <div className="flex flex-col mx-auto h-[95%] w-[90%] justify-around">
+            <div className="font-semibold text-1vw">Connection Input</div>
 
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="clientId"
-            >
-              Client ID:
-            </label>
-            <input
-              className="w-[85%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm pl-2 my-2 py-1"
-              type="text"
-              id="clientId"
-              value={clientId}
-              onChange={(event) => setClientId(event.target.value)}
-            />
-          </div>
-
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="protocol"
-            >
-              Host:
-            </label>
-            <div className="w-[85%]">
-              <select
-                className="w-[20%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm pl-2 my-2 py-1"
-                id="protocol"
-                value={protocol}
-                onChange={(event) => setProtocol(event.target.value)}
+            <div className="flex justify-between">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="clientId"
               >
-                <option value="mqtt">mqtt</option>
-                <option value="mqtts">mqtts</option>
-              </select>
+                Client ID:
+              </label>
               <input
-                className="w-[80%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm pl-2 my-2 py-1"
+                className="w-[85%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm text-1vw p-[0.5%]"
                 type="text"
-                id="host"
-                value={host}
-                onChange={(event) => setHost(event.target.value)}
+                id="clientId"
+                value={clientId}
+                onChange={(event) => setClientId(event.target.value)}
               />
             </div>
-          </div>
 
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="clientId"
-            >
-              Port:
-            </label>
-            <input
-              className="w-[85%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm pl-2 my-2 py-1"
-              type="text"
-              id="port"
-              value={port}
-              onChange={(event) => setPort(event.target.value)}
-            />
-          </div>
+            <div className="flex justify-between">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="protocol"
+              >
+                Host:
+              </label>
+              <div className="w-[85%]">
+                <select
+                  className="w-[20%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm text-1vw p-[0.5%]"
+                  id="protocol"
+                  value={protocol}
+                  onChange={(event) => setProtocol(event.target.value)}
+                >
+                  <option value="mqtt">mqtt</option>
+                  <option value="mqtts">mqtts</option>
+                </select>
+                <input
+                  className="w-[80%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm text-1vw p-[0.5%]"
+                  type="text"
+                  id="host"
+                  value={host}
+                  onChange={(event) => setHost(event.target.value)}
+                />
+              </div>
+            </div>
 
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="clientId"
-            >
-              Topic:
-            </label>
-            <input
-              className="w-[85%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm pl-2 my-2 py-1"
-              type="text"
-              id="topic"
-              value={topic}
-              onChange={(event) => setTopic(event.target.value)}
-            />
-          </div>
+            <div className="flex justify-between">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="clientId"
+              >
+                Port:
+              </label>
+              <input
+                className="w-[85%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm text-1vw p-[0.5%]"
+                type="text"
+                id="port"
+                value={port}
+                onChange={(event) => setPort(event.target.value)}
+              />
+            </div>
 
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="useSSL"
-            >
-              SSL/TLS:
-            </label>
-            <input
-              className="my-4 rounded focus:ring-light-purple"
-              type="checkbox"
-              id="useSSL"
-              checked={useSSL}
-              onChange={(event) => setUseSSL(event.target.checked)}
-            />
-          </div>
+            <div className="flex justify-between">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="clientId"
+              >
+                Topic:
+              </label>
+              <input
+                className="w-[85%] border border-gray-300 focus:outline-none focus:border-light-purple rounded-lg shadow-sm text-1vw p-[0.5%]"
+                type="text"
+                id="topic"
+                value={topic}
+                onChange={(event) => setTopic(event.target.value)}
+              />
+            </div>
 
-          <div className="font-semibold text-xl mt-8 mb-2">Certificates</div>
+            <div className="flex justify-between">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="useSSL"
+              >
+                SSL/TLS:
+              </label>
+              <input
+                className="rounded focus:ring-light-purple"
+                type="checkbox"
+                id="useSSL"
+                checked={useSSL}
+                onChange={(event) => setUseSSL(event.target.checked)}
+              />
+            </div>
 
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="cert"
-            >
-              Certificate:
-            </label>
-            <input
-              className="w-[85%] pl-2 my-2"
-              type="file"
-              id="cert"
-              onChange={(event) => setCert(event.target.files[0])}
-            />
-          </div>
+            <div className="font-semibold text-1vw">Certificates</div>
 
-          <div className="flex justify-between">
-            <label
-              className="w-[10%] text-light-purple align-center my-auto text-right"
-              htmlFor="key"
-            >
-              Key:
-            </label>
-            <input
-              className="w-[85%] pl-2 my-2 "
-              type="file"
-              id="key"
-              onChange={(event) => setKey(event.target.files[0])}
-            />
-          </div>
+            <div className="flex justify-between">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="cert"
+              >
+                Certificate:
+              </label>
+              <input
+                className="w-[85%] text-1vw"
+                type="file"
+                id="cert"
+                onChange={(event) => setCert(event.target.files[0])}
+              />
+            </div>
 
-          <div className="flex justify-end">
-            <button
-              className="mt-8 bg-light-purple text-white rounded-full px-6 py-2"
-              type="submit"
-            >
-              Submit
-            </button>
+            <div className="flex justify-between text-1vw">
+              <label
+                className="w-[10%] text-light-purple align-center my-auto text-right text-1vw"
+                htmlFor="key"
+              >
+                Key:
+              </label>
+              <input
+                className="w-[85%]"
+                type="file"
+                id="key"
+                onChange={(event) => setKey(event.target.files[0])}
+              />
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                className="bg-light-purple text-white rounded-full text-1vw px-[2%] py-[1%]"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
           </div>
         </form>
       </div>

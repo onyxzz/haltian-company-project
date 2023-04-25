@@ -9,6 +9,12 @@ module.exports = {
       fontFamily: {
         "roboto-font": ["Roboto"],
       },
+      fontSize: {
+        "3vw": "3vw",
+        "2vw": "2vw",
+        "1.5vw": "1.5vw",
+        "1vw": "1vw",
+      },
     },
   },
   plugins: [],
