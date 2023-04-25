@@ -25,6 +25,7 @@ To view the air quality data, first fill in the connection form on the home page
 ## Features
 
 Real-time indoor data:
+
 - Air Quality Index
 - Carbon Dioxide
 - T.V.O.C.
@@ -36,7 +37,9 @@ Real-time indoor data:
 - Light Level
 
 Real-time outdoor data:
+
 - Air Quality Index
+- Weather
 - Temperature
 - Humidity
 - Wind

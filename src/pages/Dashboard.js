@@ -244,14 +244,14 @@ export const Dashboard = ({ historyData }) => {
       : null
 
   return (
-    <div className="bg-[#F8F8FF] h-screen">
+    <div className="bg-[#F8F8FF] h-screen items-center flex">
       {alerts.length > 0 && (
         <div
           className="fixed z-50 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center"
           style={hiddenElement}
         >
           <div className="bg-red-600 flex">
-            <div className=" text-white font-bold p-16  flex-col items-center justify-between">
+            <div className=" text-white text-2vw font-bold p-16  flex-col items-center justify-between">
               {alerts.map((alert, index) => (
                 //<p className="text-6xl">{alert}</p>
                 <p className="my-2" key={index}>
@@ -260,7 +260,7 @@ export const Dashboard = ({ historyData }) => {
               ))}
             </div>
             <button
-              className="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 mr-4"
+              className="text-white text-2vw hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 mr-4"
               onClick={handleDismiss}
             >
               X
@@ -269,209 +269,211 @@ export const Dashboard = ({ historyData }) => {
         </div>
       )}
 
-      <div className="pt-4 px-32 flex flex-col justify-between h-[90%]">
-        <div className="text-light-purple font-bold text-5xl font-sans mb-4 text-center">
+      <div className="flex flex-col justify-between h-[90%] w-[95%] mx-auto">
+        {/* TOP */}
+
+        <div className="text-light-purple font-bold text-3vw font-sans text-center">
           INDOOR AIR QUALITY MORNITORING
           {/* <div className="w-[20%] flex justify-between">
             <button
-              className="rounded-xl bg-light-purple text-white h-[50%] w-[40%]"
+              className="rounded-xl bg-light-purple text-white "
               onClick={navigateHistory}
             >
               History
             </button>
             <button
-              className="rounded-xl bg-light-purple text-white h-[50%] w-[40%]"
+              className="rounded-xl bg-light-purple text-white "
               onClick={navigateConnection}
             >
               Disconnect
             </button>
-
           </div> */}
         </div>
-        <div className="flex flex-col justify-between ">
-          <div className="flex justify-between mb-4 ">
-            <div className="bg-white rounded-xl flex flex-col w-[30%] h-auto justify-between p-4">
-              <div className="text-center text-light-purple text-2xl ">
-                AIR QUALITY INDEX
+
+        {/* MID */}
+
+        <div className="flex justify-between h-1/2">
+          <div className="bg-white rounded-xl flex flex-col w-[30%] h-auto justify-between p-4">
+            <div className="text-center text-light-purple text-1.5vw">
+              AIR QUALITY INDEX
+            </div>
+
+            <CircularProgressbar
+              className="max-w-[45%] mx-auto"
+              value={typeof aqi === "number" ? 100 - aqi : 50}
+              text={aqi || "Analyzing"}
+              styles={buildStyles({
+                textColor: "#7284FF",
+                pathColor: "#7284FF",
+                trailColor: "#F8F8FF",
+              })}
+            />
+
+            <div
+              className="text-center text-light-purple text-2vw font-semibold"
+              style={qualityStyle}
+            >
+              {quality || "Analyzing"}
+            </div>
+            <div className="text-blue-600/50 text-1xl font-semibold text-1vw">
+              Last updated:{" "}
+              {currentTime.toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                hour12: false,
+                // weekday: 'short',
+                // month: 'short',
+                // day: 'numeric',
+              })}
+            </div>
+          </div>
+
+          <div className="w-[30%] flex flex-col justify-between">
+            <div className="bg-white rounded-xl flex h-[45%]" style={co2Style}>
+              <div className="flex align-middle justify-center w-[50%]">
+                <img
+                  className="w-[55%] align-middle m-auto"
+                  src="co2-cloud.png"
+                  alt="img"
+                />
               </div>
 
-              <CircularProgressbar
-                className="max-w-[55%] mx-auto"
-                value={typeof aqi === "number" ? 100 - aqi : 50}
-                text={aqi || "Analyzing"}
-                styles={buildStyles({
-                  textColor: "#7284FF",
-                  pathColor: "#7284FF",
-                  trailColor: "#F8F8FF",
-                })}
-              />
-
-              <div
-                className="text-center text-light-purple text-1xl font-semibold"
-                style={qualityStyle}
-              >
-                {quality || "Analyzing"}
-              </div>
-              <div className="text-blue-600/50 text-1xl font-semibold text-1xl">
-                Last updated:{" "}
-                {currentTime.toLocaleString("en-US", {
-                  hour: "numeric",
-                  minute: "numeric",
-                  second: "numeric",
-                  hour12: false,
-                  // weekday: 'short',
-                  // month: 'short',
-                  // day: 'numeric',
-                })}
+              <div className="flex flex-col justify-around">
+                <div
+                  className="text-light-purple mt-[15%] font-medium text-1.5vw"
+                  style={co2Style}
+                >
+                  Carbon Dioxide
+                </div>
+                <div className="inline-block mb-[15%] text-1.5vw font-bold">
+                  {realtimeData.co2 || 0} ppm
+                </div>
+                {/* <div className="inline-block text-1xl font-light">ppm</div> */}
               </div>
             </div>
 
-            <div className="w-[30%] flex flex-col justify-between">
-              <div
-                className="bg-white rounded-xl flex py-4 mb-8"
-                style={co2Style}
-              >
-                <div className="flex align-middle justify-center w-[50%]">
-                  <img
-                    className="w-[55%] align-middle m-auto"
-                    src="co2-cloud.png"
-                    alt="img"
-                  />
-                </div>
-
-                <div className="flex flex-col justify-around">
-                  <div
-                    className="text-light-purple font-medium text-1xl pt-4 pb-4"
-                    style={co2Style}
-                  >
-                    Carbon Dioxide
-                  </div>
-                  <div className="inline-block text-1xl font-bold pr-2 pb-8 ">
-                    {realtimeData.co2 || 0} ppm
-                  </div>
-                  {/* <div className="inline-block text-1xl font-light">ppm</div> */}
-                </div>
+            <div className="bg-white rounded-xl flex h-[45%]" style={tvocStyle}>
+              <div className="flex align-middle justify-center w-[50%]">
+                <img
+                  className="w-[55%] align-middle m-auto"
+                  src="flask.png"
+                  alt="img"
+                />
               </div>
-
-              <div className="bg-white rounded-xl flex py-4" style={tvocStyle}>
-                <div className="flex align-middle justify-center w-[50%]">
-                  <img
-                    className="w-[55%] align-middle m-auto"
-                    src="flask.png"
-                    alt="img"
-                  />
+              <div className="flex flex-col justify-around">
+                <div
+                  className="mt-[15%] text-light-purple font-medium text-1.5vw"
+                  style={tvocStyle}
+                >
+                  T. V. O. C.
                 </div>
-                <div className="flex flex-col justify-around">
-                  <div
-                    className="text-1xl text-light-purple font-medium pt-4 pb-4"
-                    style={tvocStyle}
-                  >
-                    T. V. O. C.
-                  </div>
-                  <div className="inline-block text-1xl font-bold pr-2 pb-8">
-                    {realtimeData.tvoc || 0} ppb
-                  </div>
-                  {/* <div className="inline-block text-1xl font-light">ppb</div> */}
+                <div className="inline-block mb-[15%] font-bold text-1.5vw">
+                  {realtimeData.tvoc || 0} ppb
                 </div>
-              </div>
-            </div>
-
-            <div className="w-[30%] flex flex-col justify-between">
-              <div className="bg-white rounded-xl flex py-4 mb-8">
-                <div className="flex align-middle justify-center w-[50%]">
-                  <img
-                    className="max-w-[55%] align-middle m-auto"
-                    src="barometer.png"
-                    alt="img"
-                  />
-                </div>
-                <div className="flex flex-col justify-around">
-                  <div className=" text-1xl text-light-purple font-medium pt-4 pb-4">
-                    Air Pressure
-                  </div>
-                  <div className="inline-block text-1xl font-bold pr-2 pb-8">
-                    {realtimeData.airp || 0} hPa
-                  </div>
-                  {/* <div className="inline-block text-1xl font-light">hPA</div> */}
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl flex py-4" style={tempStyle}>
-                <div className="flex align-middle justify-center w-[50%]">
-                  <img
-                    className="max-w-[55%] align-middle m-auto"
-                    src="thermometer.png"
-                    alt="img"
-                  />
-                </div>
-                <div className="flex flex-col justify-around">
-                  <div
-                    className="text-1xl  text-light-purple font-medium pt-4 pb-4"
-                    style={tempStyle}
-                  >
-                    Temperature
-                  </div>
-                  <div className="inline-block  text-1xl font-bold pr-2 pb-8">
-                    {realtimeData.temp || 0} Cel
-                  </div>
-                  {/* <div className="inline-block text-1xl  font-light">Cel</div> */}
-                </div>
+                {/* <div className="inline-block text-1xl font-light">ppb</div> */}
               </div>
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <div className="w-[35%] rounded-xl flex flex-col justify-between ">
-              <div className="flex bg-white rounded-xl justify-around mb-8">
-                <div className="flex p-8">
-                  <div className="border-r-2 border-r-black">
-                    <div className="flex pb-4" style={humdStyle}>
-                      <img className="w-[30%] " src="humidity.png" alt="img" />
-                      <div className="align-center m-auto text-1xl ">
-                        <div>Humidity</div>
-                        <div className="font-bold">
-                          {realtimeData.humd || 0}%
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex">
-                      <img className="w-[30%] " src="lamp.png" alt="img" />
-                      <div className="align-center m-auto text-1xl ">
-                        <div>Light Level</div>
-                        <div className="font-bold">
-                          {realtimeData.light || 0}
-                        </div>
+          <div className="w-[30%] flex flex-col justify-between">
+            <div className="bg-white rounded-xl flex h-[45%]">
+              <div className="flex align-middle justify-center w-[50%]">
+                <img
+                  className="max-w-[55%] align-middle m-auto"
+                  src="barometer.png"
+                  alt="img"
+                />
+              </div>
+              <div className="flex flex-col justify-around">
+                <div className="mt-[15%] text-light-purple font-medium text-1.5vw">
+                  Air Pressure
+                </div>
+                <div className="inline-block mb-[15%] font-bold text-1.5vw">
+                  {realtimeData.airp || 0} hPa
+                </div>
+                {/* <div className="inline-block text-1xl font-light">hPA</div> */}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl flex h-[45%]" style={tempStyle}>
+              <div className="flex align-middle justify-center w-[50%]">
+                <img
+                  className="max-w-[55%] align-middle m-auto"
+                  src="thermometer.png"
+                  alt="img"
+                />
+              </div>
+              <div className="flex flex-col justify-around">
+                <div
+                  className="mt-[15%] text-light-purple font-medium text-1.5vw"
+                  style={tempStyle}
+                >
+                  Temperature
+                </div>
+                <div className="inline-block mb-[15%] font-bold text-1.5vw">
+                  {realtimeData.temp || 0} Cel
+                </div>
+                {/* <div className="inline-block text-1xl  font-light">Cel</div> */}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* BOT */}
+
+        <div className="flex justify-between h-[30%]">
+          <div className="w-[35%] rounded-xl flex flex-col justify-between ">
+            <div className="flex bg-white rounded-xl justify-around mb-8">
+              <div className="flex">
+                <div className="border-r-2 border-r-black">
+                  <div className="flex" style={humdStyle}>
+                    <img className="w-[30%]" src="humidity.png" alt="img" />
+                    <div className="align-center m-auto text-1vw">
+                      <div>Humidity</div>
+                      <div className="font-bold text-1vw">
+                        {realtimeData.humd || 0}%
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="flex  p-8">
-                  <div>
-                    <div className="flex pb-4">
-                      <img className="w-[30%] " src="sunrise.png" alt="img" />
-                      <div className="align-center m-auto text-1xl ">
-                        <div>Sunrise</div>
-                        <div className="font-bold">
-                          {realtimeData.sunrise || "00:00"}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex">
-                      <img className="w-[30%] " src="sunset.png" alt="img" />
-                      <div className="align-center m-auto text-1xl ">
-                        <div>Sunset</div>
-                        <div className="font-bold">
-                          {realtimeData.sunset || "00:00"}
-                        </div>
+                  <div className="flex">
+                    <img className="w-[30%]" src="lamp.png" alt="img" />
+                    <div className="align-center m-auto text-1vw">
+                      <div>Light Level</div>
+                      <div className="font-bold text-1vw">
+                        {realtimeData.light || 0}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <div className="bg-[#C3CAFF] rounded-xl p-8 text-3xl text-black font-semibold "> */}
-              {/* Suggestion */}
-              {/* Last updated: {currentTime.toLocaleString('en-US', {
+
+              <div className="flex">
+                <div>
+                  <div className="flex">
+                    <img className="w-[30%]" src="sunrise.png" alt="img" />
+                    <div className="align-center m-auto text-1vw">
+                      <div>Sunrise</div>
+                      <div className="font-bold text-1vw">
+                        {realtimeData.sunrise || "00:00"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex">
+                    <img className="w-[30%]" src="sunset.png" alt="img" />
+                    <div className="align-center m-auto text-1vw">
+                      <div>Sunset</div>
+                      <div className="font-bold text-1vw">
+                        {realtimeData.sunset || "00:00"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="bg-[#C3CAFF] rounded-xl p-8 text-3xl text-black font-semibold "> */}
+            {/* Suggestion */}
+            {/* Last updated: {currentTime.toLocaleString('en-US', {
                 hour: 'numeric',
                 minute: 'numeric',
                 second: 'numeric',
@@ -480,127 +482,123 @@ export const Dashboard = ({ historyData }) => {
                 // month: 'short',
                 // day: 'numeric',
               })} */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                border: "1px solid black",
+                borderRadius: "5px",
+              }}
+              className="text-black font-semibold bg-[#C3CAFF] rounded-xl"
+            >
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  border: "1px solid black",
-                  borderRadius: "5px",
+                  height: "auto",
+                  textAlign: "center",
+                  fontWeight: "bold",
                 }}
-                className="p-8 text-1xl text-black font-semibold bg-[#C3CAFF] rounded-xl"
+                className="bg-[#C3CAFF] rounded-xl text-1vw"
               >
-                <div
-                  style={{
-                    height: "auto",
-                    textAlign: "center",
-                    fontWeight: "bold",
-                  }}
-                  className="bg-[#C3CAFF] rounded-xl "
-                >
-                  {`${hours < 10 ? "0" : ""}${hours}:${
-                    minutes < 10 ? "0" : ""
-                  }${minutes}:${seconds < 10 ? "0" : ""}${seconds} ${
-                    day < 10 ? "0" : ""
-                  }${day}/${month < 10 ? "0" : ""}${month}/${year} `}
-                </div>
+                {`${hours < 10 ? "0" : ""}${hours}:${
+                  minutes < 10 ? "0" : ""
+                }${minutes}:${seconds < 10 ? "0" : ""}${seconds} ${
+                  day < 10 ? "0" : ""
+                }${day}/${month < 10 ? "0" : ""}${month}/${year} `}
               </div>
-              {/* </div> */}
             </div>
-            <div className="bg-white w-[60%] rounded-xl p-8 flex flex-col justify-between">
-              <div className="text-center text-1xl font-bold	">
-                <div className="font-semibold">OUTDOOR WEATHER</div>
-              </div>
-              <div className="flex bg-white rounded-xl justify-between items-center text-1xl ">
-                <div className="flex p-4 ">
-                  <div className="border-r-2 border-r-black">
-                    <div className="flex pb-8">
-                      <img
-                        className="w-[20%] "
-                        src="mountains.512x358.png"
-                        alt="img"
-                      />
+            {/* </div> */}
+          </div>
+          <div className="bg-white w-[60%] rounded-xl p-8 flex flex-col justify-between">
+            <div className="text-center text-1.5vw font-bold	">
+              <div className="font-semibold">OUTDOOR WEATHER</div>
+            </div>
+            <div className="flex bg-white rounded-xl justify-between items-center text-1xl ">
+              <div className="flex p-4">
+                <div className="border-r-2 border-r-black">
+                  <div className="flex pb-8 justify-center">
+                    <img
+                      className="w-[20%] "
+                      src="mountains.512x358.png"
+                      alt="img"
+                    />
 
-                      {/* <svg className="h-16 w-16 text-indigo-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="4 19 8 13 12 15 16 10 20 14 20 19 4 19" />  <polyline points="4 12 7 8 11 10 16 4 20 8" /></svg> */}
-                      <div className="align-center  ml-7 my-auto">
-                        <div>Air Quality Index</div>
-                        <div className="font-bold">
-                          {outdoorData.aqi_outdoor || "Updating"}
-                        </div>
+                    {/* <svg className="h-16 w-16 text-indigo-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <polyline points="4 19 8 13 12 15 16 10 20 14 20 19 4 19" />  <polyline points="4 12 7 8 11 10 16 4 20 8" /></svg> */}
+                    <div className="align-center text-1vw ml-7 my-auto">
+                      <div>Air Quality Index</div>
+                      <div className="font-bold">
+                        {outdoorData.aqi_outdoor || "Updating"}
                       </div>
                     </div>
-                    <div className="flex">
-                      {/* <img className="w-[30%] " src="lamp.png" alt="img" />
+                  </div>
+                  <div className="flex">
+                    {/* <img className="w-[30%] " src="lamp.png" alt="img" />
                     <div className="align-center m-auto">
                       <div>Light Level</div>
                       <div className="font-bold">{realtimeData.light || 0}</div>
                     </div> */}
-                      <div className="align-center m-auto ">
-                        <div className="font-bold">
-                          {outdoorData.description || ""}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex p-4">
-                  <div className="border-r-2 border-r-black">
-                    <div className="flex pb-4 justify-center">
-                      <img
-                        className="w-[20%] "
-                        src="thermometer.png"
-                        alt="img"
-                      />
-                      <div className="align-center  ml-7 my-auto">
-                        <div>Temperature</div>
-                        <div className="font-bold">
-                          {outdoorData.temperature} Cel
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      {/* <div >
-                  <svg className="h-16 w-16 text-indigo-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="7" r="4" />  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-                    </div> */}
-                      <img
-                        className="w-[20%] "
-                        src="temperature-feels-like.989x1024.png"
-                        alt="img"
-                      />
-                      <div className="align-center ml-7 my-auto">
-                        <div>Feels like</div>
-                        <div className="font-bold">
-                          {outdoorData.app_temp || "Updating"} Cel
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex p-4">
-                  <div>
-                    <div className="flex pb-4 justify-center">
-                      <img className="w-[20%] " src="humidity.png" alt="img" />
-                      <div className="align-center  ml-7 my-auto">
-                        <div>Humidity</div>
-                        <div className="font-bold">
-                          {outdoorData.humidity || "Updating"}%
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-center">
-                      {/* <svg className="h-16 w-16 text-indigo-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  strokeLinecap="round"  stroke-linejoin="round">  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" /></svg> */}
-                      <img className="w-[20%] " src="wind-icon.png" alt="img" />
-
-                      <div className="align-center ml-7 my-auto">
-                        <div>Wind speed</div>
-                        <div className="font-bold">
-                          {outdoorData.wind_spd || "Updating"} m/s
-                        </div>
+                    <div className="align-center m-auto ">
+                      <div className="font-bold text-1vw">
+                        {outdoorData.description || ""}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <ResponsiveContainer width="100%" height={350}>
+              <div className="flex p-4">
+                <div className="border-r-2 border-r-black">
+                  <div className="flex pb-4 justify-center">
+                    <img className="w-[20%] " src="thermometer.png" alt="img" />
+                    <div className="align-center text-0.75vw ml-7 my-auto">
+                      <div>Temperature</div>
+                      <div className="font-bold">
+                        {outdoorData.temperature} Cel
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    {/* <div >
+                  <svg className="h-16 w-16 text-indigo-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="7" r="4" />  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+                    </div> */}
+                    <img
+                      className="w-[20%] "
+                      src="temperature-feels-like.989x1024.png"
+                      alt="img"
+                    />
+                    <div className="align-center text-0.75vw ml-7 my-auto">
+                      <div>Feels like</div>
+                      <div className="font-bold">
+                        {outdoorData.app_temp || "Updating"} Cel
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex p-4">
+                <div>
+                  <div className="flex pb-4 justify-center">
+                    <img className="w-[20%] " src="humidity.png" alt="img" />
+                    <div className="align-center text-0.75vw ml-7 my-auto">
+                      <div>Humidity</div>
+                      <div className="font-bold">
+                        {outdoorData.humidity || "Updating"}%
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    {/* <svg className="h-16 w-16 text-indigo-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  strokeLinecap="round"  stroke-linejoin="round">  <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" /></svg> */}
+                    <img className="w-[20%] " src="wind-icon.png" alt="img" />
+
+                    <div className="align-center text-0.75vw ml-7 my-auto">
+                      <div>Wind speed</div>
+                      <div className="font-bold">
+                        {outdoorData.wind_spd || "Updating"} m/s
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <ResponsiveContainer width="100%" height={350}>
               <LineChart data={temperatureData}>
                 <XAxis dataKey="Time" />
                 <YAxis />
@@ -611,9 +609,8 @@ export const Dashboard = ({ historyData }) => {
               </LineChart>
             </ResponsiveContainer> */}
 
-              <div className="text-center text-1xl ">
-                Last observation time: {outdoorData.ob_time || "Updating"}
-              </div>
+            <div className="text-center text-0.5vw">
+              Last observation time: {outdoorData.ob_time || "Updating"}
             </div>
           </div>
         </div>

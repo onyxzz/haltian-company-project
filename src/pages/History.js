@@ -54,7 +54,7 @@ export const History = () => {
     <div className="bg-[#F8F8FF] h-screen flex items-center">
       <div className="flex flex-col justify-between mx-auto h-[85%] w-[90%]">
         <div className="text-3vw text-light-purple font-bold mx-auto">
-          HALTIAN DEMO
+          Indoor Air Quality Monitoring
         </div>
         <div className="bg-white justify-around rounded-xl w-[80%] h-[85%] flex-col flex mx-auto items-center">
           <div className="mx-auto h-[90%] w-[95%] justify-between flex flex-col">
